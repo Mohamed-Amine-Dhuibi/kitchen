@@ -63,6 +63,10 @@ img{
     object-fit: cover;
 }
 
+html, body {
+    overflow: scroll;
+}
+
 }
 
 

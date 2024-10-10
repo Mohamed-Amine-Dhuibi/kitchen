@@ -59,14 +59,14 @@ body{
 
 }
 .title::before{
-    content: url("./icons/GridL.png");
+    content: url("../icons/GridL.png");
     display: block;
     margin-right: 1rem;
 
 
 }
 .title::after{
-    content: url("./icons/GridR.png");
+    content: url("../icons/GridR.png");
     display: block;
     margin-left: 1rem;
 
