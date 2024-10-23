@@ -12,6 +12,14 @@
   border: 2px solid rgba(239, 231, 210, 0.15);
 }
 
+.margin-auto{
+  margin-left:auto;
+  margin-right:auto;
+
+}
+.margin-t-5{
+  margin-top: 5rem;
+}
 .menu-item {
   display: flex;
   flex-direction: row;
@@ -92,7 +100,13 @@ button {
   color: #ffffff;
   font-size: 16px;
 }
+input .valid {
+  border-color: #28a745;
+}
 
+input .error {
+  border-color: #670404;
+}
 input::placeholder {
   color: #888;
 }
@@ -225,6 +239,75 @@ table tr {
 }
 
 
+.msg-error
+{
+  display: inline-block;
+  align-content: center;
+  width: 100%;
+  height: 2rem;
+  background-color: #f5e7c6;
+  border: solid 2px #fa1e1e;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 5px;
+  color: #111;
+}
+
+.client-list-container {
+  max-width: 80%;
+  margin: 5rem auto;
+  padding: 20px;
+  border: 2px solid rgba(239, 231, 210, 0.15);
+  border-radius: 10px;
+  background-color: #1a1a1a;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.client-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #dba622;
+}
+
+.client-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.client-username {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.client-email {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.client-list-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #f6f6f6;
+}
+.currency-dropdown {
+  position: fixed;
+  right: 12px;
+  top : 12px;
+  font-size: 16px;
+  margin: 20px;
+  border: 2px solid rgba(239, 231, 210, 0.15);
+  border-radius: 10px;
+  padding: 5px;
+  background-color: black; 
+  color: white; 
+  border: 1px solid white; 
+}
+
 @media only screen and (max-width: 75rem) {
 
   .header-box-container{
@@ -246,5 +329,12 @@ table tr {
   .opening-hours-container{
     padding:.5rem ;
   }
+  .client-list-container {
+    width: 90%;
+  }
 
+  .client-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

@@ -31,6 +31,12 @@
             <div class="header-item">
                 <a href="./about.html">About</a>
             </div>
+            <div class="header-item">
+                <a href="./signup.html">Sign up</a>
+            </div>
+            <div class="header-item">
+                <a href="./signin.html">Sign in</a>
+            </div>
             <a href="./reservation.html" class="headerButton">BOOK A TABLE</a>
         </div>
 
@@ -39,6 +45,12 @@
             <h1 class="hero-text">The MENU</h1>
         </div>
         <div class="section half-size border-2">
+            <select id="currencySelect" class="currency-dropdown">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="TND">TND</option>
+            </select>
+        
             <div class="menu-tags">
 
                 <a href="#maki" class="headerButton">
@@ -61,7 +73,7 @@
                     <div class="menu-item-title">
                         <span>Spicy Tuna Maki</span>
                         <span class="dots"></span>
-                        <span>5$</span>
+                        <span name="price">5$</span>
                     </div>
                     <div class="menu-item-description">
                         A tantalizing blend of spicy tuna, cucumber, and avocado, harmoniously rolled in nori and
@@ -75,7 +87,7 @@
                     <div class="menu-item-title">
                         <span>Salmon Maki</span>
                         <span class="dots"></span>
-                        <span>5$</span>
+                        <span name="price">5$</span>
                     </div>
                     <div class="menu-item-description">
                         Shiitake mushrooms, avocado, and pickled daikon radish nestle within a roll of seasoned rice,
@@ -89,7 +101,7 @@
                     <div class="menu-item-title">
                         <span>Mango Maki</span>
                         <span class="dots"></span>
-                        <span>5$</span>
+                        <span name="price">5$</span>
                     </div>
                     <div class="menu-item-description">
                         Tempura-fried shrimp, cucumber, and cream cheese embrace a center of fresh avocado, delivering a
@@ -107,7 +119,7 @@
                     <div class="menu-item-title">
                         <span>Volcano Delight</span>
                         <span class="dots"></span>
-                        <span>7$</span>
+                        <span name="price">7$</span>
                     </div>
                     <div class="menu-item-description">
                         Creamy crab salad, avocado, and cucumber rolled inside, topped with spicy tuna and drizzled with
@@ -121,7 +133,7 @@
                     <div class="menu-item-title">
                         <span>Rainbow Fusion</span>
                         <span class="dots"></span>
-                        <span>7$</span>
+                        <span name="price">7$</span>
                     </div>
                     <div class="menu-item-description">
                         A colorful blend of fresh tuna, salmon, yellowtail, and avocado, enveloping a core of cucumber
@@ -135,7 +147,7 @@
                     <div class="menu-item-title">
                         <span>Dragon Elegance</span>
                         <span class="dots"></span>
-                        <span>7$</span>
+                        <span name="price">7$</span>
                     </div>
                     <div class="menu-item-description">
                         Grilled eel and avocado nestled within the roll, draped with slices of ripe avocado resembling
@@ -149,7 +161,7 @@
                     <div class="menu-item-title">
                         <span>Tokyo Blossom</span>
                         <span class="dots"></span>
-                        <span>10$</span>
+                        <span name="price">10$</span>
                     </div>
                     <div class="menu-item-description">
                         Delicate pink soy paper envelopes a blend of tuna, crab stick, and cucumber, embellished with
@@ -167,7 +179,7 @@
                     <div class="menu-item-title">
                         <span>Sunrise Bliss</span>
                         <span class="dots"></span>
-                        <span>18$</span>
+                        <span name="price">18$</span>
                     </div>
                     <div class="menu-item-description">
                         A delicate combination of fresh salmon, cream cheese, and asparagus, rolled in orange-hued
@@ -181,7 +193,7 @@
                     <div class="menu-item-title">
                         <span>Mango Tango Fusion</span>
                         <span class="dots"></span>
-                        <span>18$</span>
+                        <span name="price">18$</span>
                     </div>
                     <div class="menu-item-description">
                         Tempura shrimp, cucumber, and avocado dance alongside sweet mango slices, drizzled with a tangy
@@ -195,7 +207,7 @@
                     <div class="menu-item-title">
                         <span>Pacific Firecracker</span>
                         <span class="dots"></span>
-                        <span>18$</span>
+                        <span name="price">18$</span>
                     </div>
                     <div class="menu-item-description">
                         Spicy crab salad, tempura shrimp, and jalapeño peppers combine in a fiery ensemble, accented
@@ -208,6 +220,43 @@
 
 
     </div>
+    <script>
+        const conversionRates = {
+            EUR: 0.92, // 1 USD = 0.92 EUR
+            USD: 1.00, // 1 USD
+            TND: 3.20  // 1 USD = 3.20 TND
+        };
+    
+        let currentCurrency = 'USD';
+    
+        function convertCurrency(priceInCurrentCurrency, targetCurrency) {
+            const priceInUSD = priceInCurrentCurrency / conversionRates[currentCurrency];
+            return (priceInUSD * conversionRates[targetCurrency]).toFixed(2);
+        }
+    
+        function updatePrices(selectedCurrency) {
+            console.log(selectedCurrency);
+            
+            const prices = document.getElementsByName('price');
+    
+            prices.forEach(priceElement => {
+                const priceInCurrentCurrency = parseFloat(priceElement.innerText.replace(/[^0-9.-]+/g, ''));
+    
+                const convertedPrice = convertCurrency(priceInCurrentCurrency, selectedCurrency);
+                priceElement.innerText = `${convertedPrice} ${selectedCurrency}`;
+            });
+    
+            currentCurrency = selectedCurrency;
+        }
+    
+        document.getElementById('currencySelect').addEventListener('change', function () {
+            const selectedCurrency = this.value;
+            updatePrices(selectedCurrency);
+        });
+    
+        updatePrices(currentCurrency); 
+    </script>
+    
 </body>
 
 </html>

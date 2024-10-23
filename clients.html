@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client List</title>
+  <link rel="stylesheet" href="./styles/app.css">
+  <link rel="stylesheet" href="./styles/commstyles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="toggle_menu">
+            <img src="./icons/menu.svg" alt="">
+        </div>
+        <a href="./index.html"><img src="./icons/image-removebg-preview.png" class="logo" alt="">
+        </a>
+        <div class="header-item">
+            <a href="./menu.html">Menu</a>
+        </div>
+        <div class="header-item">
+            <a href="./about.html">About</a>
+        </div>
+        <div class="header-item">
+            <a href="./signup.html">Sign up</a>
+        </div>
+        <div class="header-item">
+            <a href="./signin.html">Sign in</a>
+        </div>
+        <div class="header-item">
+            <a href="./clients.html">Clients</a>
+        </div>
+
+        <a href="./reservation.html" class="headerButton">BOOK A TABLE</a>
+    </div>
+
+<div class="client-list-container">
+    <h1 class="client-list-title">Client List</h1>
+    <div id="clientList"></div>
+  </div>
+
+
+  <script>
+    function loadClientList() {
+      const clientListContainer = document.getElementById('clientList');
+      const clients = JSON.parse(localStorage.getItem('users')) || [];
+
+      if (clients.length === 0) {
+        clientListContainer.innerHTML = '<p>No clients found.</p>';
+      } else {
+        clients.forEach(client => {
+          const clientItem = document.createElement('div');
+          clientItem.classList.add('client-item');
+
+          const clientInfo = document.createElement('div');
+          clientInfo.classList.add('client-info');
+
+          const clientUsername = document.createElement('p');
+          clientUsername.classList.add('client-username');
+          clientUsername.textContent = `Username: ${client.username}`;
+
+          const clientEmail = document.createElement('p');
+          clientEmail.classList.add('client-email');
+          clientEmail.textContent = `Email: ${client.email}`;
+
+          clientInfo.appendChild(clientUsername);
+          clientInfo.appendChild(clientEmail);
+          clientItem.appendChild(clientInfo);
+
+          clientListContainer.appendChild(clientItem);
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadClientList);
+  </script>
+
+</body>
+</html>
