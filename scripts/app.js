@@ -54,7 +54,18 @@ class Validator {
         console.log('User saved to localStorage:', user);
         return true;
     }
-
+    login() {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(user => user.username === this.username && user.password === this.password);
+    
+        if (user) {
+            console.log('Login successful!');
+            return true;
+        } else {
+            console.log('Invalid username or password.');
+            return false;
+        }
+    }
 }
 
 document.getElementById('signInForm')?.addEventListener('submit', function(event) {
@@ -65,39 +76,35 @@ document.getElementById('signInForm')?.addEventListener('submit', function(event
 
     const validator = new Validator(username, '', password);
 
-    const usernameError = document.getElementById('signupUsername-error');
-    const passwordError = document.getElementById('signupPassword-error');
+    const usernameError = document.getElementById('signInUsername-error');
+    const passwordError = document.getElementById('signInPassword-error');
+    const valid = validator.login();
 
-    let valid = true;
-
-    if (!validator.validateUsername()) {
-        valid = false;
-        usernameError.className ="msg-error";
-        usernameError.textContent = "Username is in wrong format.";
+    if (!valid) {
+        usernameError.className = "msg-error";
+        passwordError.className = "msg-error";
+        usernameError.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+        passwordError.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+    
         document.getElementById('signInUsername').classList.remove('valid');
         document.getElementById('signInUsername').classList.add('error');
-    } else {
-        usernameError.textContent = "";
-        document.getElementById('signInUsername').classList.add('valid');
-        document.getElementById('signInUsername').classList.remove('error');
-        usernameError.classList.remove('msg-error');
-    }
-
-    if (!validator.validatePassword()) {
-        valid = false;
-        passwordError.className = "msg-error";
-        passwordError.textContent = "Password must contain at least 8 characters.";
+    
         document.getElementById('signInPassword').classList.remove('valid');
         document.getElementById('signInPassword').classList.add('error');
     } else {
+        usernameError.textContent = "";
         passwordError.textContent = "";
+        
+        document.getElementById('signInUsername').classList.add('valid');
+        document.getElementById('signInUsername').classList.remove('error');
+        
         document.getElementById('signInPassword').classList.add('valid');
         document.getElementById('signInPassword').classList.remove('error');
+        
+        usernameError.classList.remove('msg-error');
         passwordError.classList.remove('msg-error');
-    }
-
-    if (valid) {
-        alert("Connexion réussie !");
+        
+        alert("Login success !");
     }
 });
 
@@ -150,7 +157,7 @@ document.getElementById('signupForm')?.addEventListener('submit', function(event
     if (!validator.validatePassword()) {
         valid = false;
         passwordError.className = "msg-error";
-        passwordError.textContent = "Password must contain at least 8 characters.";
+        passwordError.textContent = "Le mot de passe doit contenir au moins 8 caractères,une majuscule,\n une minuscule,\n un chiffre et un caractère spécial.";
         document.getElementById('signupPassword').classList.remove('valid');
         document.getElementById('signupPassword').classList.add('error');
     } else {
